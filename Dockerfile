@@ -11,8 +11,8 @@ RUN cd /build \
 
 # Run the server
 WORKDIR /app
-ARG env_port=4000
+ARG env_port
 ENV PORT=$env_port
 ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["run"]
-EXPOSE $env_port
+EXPOSE 4000
