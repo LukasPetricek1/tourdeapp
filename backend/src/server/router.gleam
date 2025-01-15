@@ -1,10 +1,11 @@
+import db
 import gleam/http.{Get}
 import gleam/json
 import gleam/string_tree
 import server/web
 import wisp.{type Request, type Response}
 
-pub fn handle_request(req: Request) -> Response {
+pub fn handle_request(req: Request, ctx: db.Context) -> Response {
   use _req <- web.middleware(req)
 
   case wisp.path_segments(req) {

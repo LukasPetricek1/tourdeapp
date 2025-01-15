@@ -1,4 +1,5 @@
 *.beam
 *.ez
+*.sqlite3
 /backend/build
 /backend/erl_crash.dump
