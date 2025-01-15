@@ -1,6 +1,6 @@
 import gleam/http.{Get}
 import gleam/json
-import gleam/string_builder
+import gleam/string_tree
 import server/web
 import wisp.{type Request, type Response}
 
@@ -17,7 +17,7 @@ pub fn handle_request(req: Request) -> Response {
 fn hello_world(req: Request) -> Response {
   use <- wisp.require_method(req, Get)
 
-  let html = string_builder.from_string("<h1>Hello TdA!</h1>")
+  let html = string_tree.from_string("<h1>Hello TdA!</h1>")
   wisp.ok()
   |> wisp.html_body(html)
 }
@@ -27,7 +27,7 @@ fn json_test(req: Request) -> Response {
 
   let body =
     json.object([#("organization", json.string("Student Cyber Games"))])
-    |> json.to_string_builder
+    |> json.to_string_tree
 
   wisp.ok()
   |> wisp.json_body(body)
