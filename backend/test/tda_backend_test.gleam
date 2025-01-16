@@ -3,12 +3,20 @@ import gleam/string
 import gleeunit
 import gleeunit/should
 import server/router
+import simplifile
 import sqlight
 import wisp/testing
 
 const test_db = "file:./src/test.sqlite3"
 
 pub fn main() {
+  let assert Ok(Nil) = {
+    use conn <- sqlight.with_connection(test_db)
+    let sql = "DROP TABLE games;"
+    let _ = sqlight.exec(sql, conn)
+    let assert Ok(sql) = simplifile.read("./sql/create.sql")
+    sqlight.exec(sql, conn)
+  }
   gleeunit.main()
 }
 

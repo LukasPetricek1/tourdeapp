@@ -5,9 +5,12 @@ import gleam/int
 import gleam/io
 import mist
 import server/router
+import simplifile
 import sqlight
 import wisp
 import wisp/wisp_mist
+
+const db = "./src/db.sqlite3"
 
 pub fn main() {
   wisp.configure_logger()
@@ -25,7 +28,20 @@ pub fn main() {
     Error(_) -> Ok(8080)
   }
 
-  let assert Ok(conn) = sqlight.open("file:./src/db.sqlite3")
+  let assert Ok(db_exists) = simplifile.is_file(db)
+  let assert Ok(conn) = sqlight.open("file:" <> db)
+
+  let _ = case db_exists {
+    False -> {
+      let assert Ok(sql) = simplifile.read("./sql/create.sql")
+      let assert Ok(_) = sqlight.exec(sql, conn)
+      io.println("Database created")
+    }
+    True -> {
+      io.println("Database already exists")
+    }
+  }
+
   let context = db.Context(conn)
   let handler = router.handle_request(_, context)
 
