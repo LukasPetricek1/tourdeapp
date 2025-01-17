@@ -1,4 +1,5 @@
 import db
+import gleam/bit_array
 import gleam/string
 import gleeunit
 import gleeunit/should
@@ -50,4 +51,35 @@ pub fn json_test() {
   response
   |> testing.string_body
   |> should.equal("{\"organization\":\"Student Cyber Games\"}")
+}
+
+pub fn uuid_test() {
+  let uuid = db.uuid()
+
+  string.length(uuid)
+  |> should.equal(36)
+}
+
+pub fn game_test() {
+  let game_string =
+    "{\n  \"uuid\": \"67fda282-2bca-41ef-9caf-039cc5c8dd69\",\n  \"createdAt\": \"2025-01-17T15:36:51.493Z\",\n  \"updatedAt\": \"2025-01-17T15:36:51.493Z\",\n  \"name\": \"Moje první hra\",\n  \"difficulty\": \"hard\",\n  \"gameState\": \"midgame\",\n  \"board\": [\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"O\",\n      \"O\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"X\",\n      \"O\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"X\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"X\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ]\n  ]\n}"
+
+  db.game_from_json(game_string)
+  |> should.equal(
+    Ok(db.Game(
+      uuid: "67fda282-2bca-41ef-9caf-039cc5c8dd69",
+      created_at: "2025-01-17T15:36:51.493Z",
+      updated_at: "2025-01-17T15:36:51.493Z",
+      name: "Moje první hra",
+      difficulty: db.Hard,
+      game_state: db.Midgame,
+      board: db.Board(
+        bit_array.pad_to_bytes(<<
+          0:size(120), 0:size(8), 1:size(2), 1:size(2), 0:size(18), 0:size(10),
+          2:size(2), 1:size(2), 0:size(16), 0:size(12), 2:size(2), 0:size(16),
+          0:size(14), 2:size(2), 0:size(14), 0:size(210),
+        >>),
+      ),
+    )),
+  )
 }

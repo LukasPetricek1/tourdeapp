@@ -22,9 +22,11 @@ packages = [
   { name = "marceau", version = "1.3.0", build_tools = ["gleam"], requirements = [], otp_app = "marceau", source = "hex", outer_checksum = "2D1C27504BEF45005F5DFB18591F8610FB4BFA91744878210BDC464412EC44E9" },
   { name = "mist", version = "4.0.4", build_tools = ["gleam"], requirements = ["gleam_erlang", "gleam_http", "gleam_otp", "gleam_stdlib", "gleam_yielder", "glisten", "gramps", "hpack_erl", "logging"], otp_app = "mist", source = "hex", outer_checksum = "9F87DA535A75AA1B8B37D27E59B1E60A1BE34EB2CA63BE8B211D75E5D10BEEAF" },
   { name = "platform", version = "1.0.0", build_tools = ["gleam"], requirements = [], otp_app = "platform", source = "hex", outer_checksum = "8339420A95AD89AAC0F82F4C3DB8DD401041742D6C3F46132A8739F6AEB75391" },
+  { name = "quickrand", version = "2.0.7", build_tools = ["rebar3"], requirements = [], otp_app = "quickrand", source = "hex", outer_checksum = "B8ACBF89A224BC217C3070CA8BEBC6EB236DBE7F9767993B274084EA044D35F0" },
   { name = "simplifile", version = "2.2.0", build_tools = ["gleam"], requirements = ["filepath", "gleam_stdlib"], otp_app = "simplifile", source = "hex", outer_checksum = "0DFABEF7DC7A9E2FF4BB27B108034E60C81BEBFCB7AB816B9E7E18ED4503ACD8" },
   { name = "sqlight", version = "1.0.0", build_tools = ["gleam"], requirements = ["esqlite", "gleam_stdlib"], otp_app = "sqlight", source = "hex", outer_checksum = "18A860646F29DDDDE819A9561696E6A4CA9825770EE7A9CA039E58EF5C312EC0" },
   { name = "telemetry", version = "1.3.0", build_tools = ["rebar3"], requirements = [], otp_app = "telemetry", source = "hex", outer_checksum = "7015FC8919DBE63764F4B4B87A95B7C0996BD539E0D499BE6EC9D7F3875B79E6" },
+  { name = "uuid_erl", version = "2.0.7", build_tools = ["rebar3"], requirements = ["quickrand"], otp_app = "uuid", source = "hex", outer_checksum = "4E4C5CA3461DC47C5E157ED42AA3981A053B7A186792AF972A27B14A9489324E" },
   { name = "wisp", version = "1.5.1", build_tools = ["gleam"], requirements = ["directories", "exception", "gleam_crypto", "gleam_erlang", "gleam_http", "gleam_json", "gleam_stdlib", "logging", "marceau", "mist", "simplifile"], otp_app = "wisp", source = "hex", outer_checksum = "DB7968F777CA77B41AAC8067A5151B022E857E1EECF16BFC9D5F914D0F628844" },
 ]
 
@@ -38,4 +40,5 @@ gleeunit = { version = ">= 1.0.0 and < 2.0.0" }
 mist = { version = ">= 4.0.4 and < 5.0.0" }
 simplifile = { version = ">= 2.2.0 and < 3.0.0" }
 sqlight = { version = ">= 1.0.0 and < 2.0.0" }
+uuid_erl = { version = ">= 2.0.7 and < 3.0.0" }
 wisp = { version = ">= 1.5.1 and < 2.0.0" }
